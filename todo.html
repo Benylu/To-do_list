@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type= "text/css" href="todo.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </head> 
+    <body id="Everything">
+        <svg id="SVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,224L80,234.7C160,245,320,267,480,256C640,245,800,203,960,176C1120,149,1280,139,1360,133.3L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+        </svg>
+        <div id="top">
+            <h1 id="title">Today</h1>
+            <input id ="search" type="text" value="" placeholder="Add task">
+            <img id="plusButton" src="plus_icon.png" alt="Plus icon"> </img>
+
+            <h6 id="typingspace"></h6>
+        </div>
+        <div id = "taskDisplay">
+
+        </div>
+        <button id="buttonRemove" type="button" class="btn btn-primary">Delete all</button>
+
+
+        <!-- JAVASCRIPT -->
+
+        <script>           
+            //var top = document.getElementById("top")
+            var add = document.getElementById("plusButton")
+            var removeAll= document.getElementById("buttonRemove")
+            var submit= document.getElementById("search")
+            var taskDisplay = document.getElementById("taskDisplay")
+
+            add.addEventListener("click", function(e){ 
+                if(submit.value!=""){
+                    var myDiv = document.createElement("div");
+                    myDiv.classList.add('DivStyle')
+                    var Myh3 = document.createElement("H3");
+                    Myh3.classList.add('h3Style')
+                    var checkbox = document.createElement("INPUT");
+                    checkbox.classList.add('CheckboxStyle')
+                    var deleteTask_icon = document.createElement("img")
+                    deleteTask_icon.classList.add('trashStyle')
+
+
+                    checkbox.setAttribute("type" , "checkbox")
+                    checkbox.setAttribute("aria-label" , "Checkbox for following text input")
+                    checkbox.setAttribute("class","CheckboxStyle")
+
+                    Myh3.setAttribute("class","h3Style")
+                    Myh3.setAttribute("id","h3id")
+
+                    myDiv.setAttribute("class","DivStyle")
+
+                    myDiv.style.display= "block"
+
+
+                    deleteTask_icon.setAttribute("src","trash_icon.png")
+                    deleteTask_icon.setAttribute("alt","trash")
+                    deleteTask_icon.setAttribute("class","trashStyle")
+
+
+                    Myh3.innerHTML=submit.value
+                    submit.value = ""
+
+                    myDiv.appendChild(checkbox)
+                    myDiv.appendChild(Myh3)
+                    myDiv.appendChild(deleteTask_icon)
+
+                    taskDisplay.appendChild(myDiv)
+
+                    checkbox.addEventListener("change", function (e){
+                        if (e.target.checked) {
+                            Myh3.style.textDecoration = "line-through"
+                            Myh3.style.opacity = "50%"
+                        }
+                        else {
+                            Myh3.style.textDecoration = "initial"
+                            Myh3.style.opacity = "100%"
+                        }
+                    })
+                    
+                    deleteTask_icon.addEventListener("click", function(e){
+                            taskDisplay.removeChild(myDiv)
+                    })
+                }
+            })
+            removeAll.addEventListener("click", function(e){
+                location.reload(); 
+            })
+            
+
+        </script>
+    </body>
+</html>
